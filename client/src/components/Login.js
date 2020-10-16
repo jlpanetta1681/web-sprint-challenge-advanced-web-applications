@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+// import { useHistory } from 'react-router-dom';
 import { axiosWithAuth } from '../utils/axiosWithAuth.js';
 
 export default function Login(props) {
@@ -8,25 +9,27 @@ export default function Login(props) {
 		username: '',
 		password: '',
 	});
+
+	// const history = useHistory();
+
 	const handleChange = (e) => {
 		setLogin({
 			...login,
 			[e.target.name]: e.target.value,
 		});
 	};
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		axiosWithAuth()
-			.post('login', login)
+			.post('/login', login)
 			.then((res) => {
 				console.log(res);
-				localStorage.setItem('token', res.dta.payload);
+				window.localStorage.setItem('token', res.data.payload);
 
-				props.history.push('/colors');
+				props.history.push('/bubblepage');
 			})
-			.catch((err) =>
-				console.log(`login with axiosWithAuth error`, err.response)
-			);
+			.catch((err) => console.log(err));
 	};
 
 	return (
@@ -51,9 +54,7 @@ export default function Login(props) {
 					onChange={handleChange}
 					className="input"
 				/>
-				<button className="start" onClick={handleSubmit}>
-					Login
-				</button>
+				<button type="submit">Submit</button>
 			</form>
 		</>
 	);
