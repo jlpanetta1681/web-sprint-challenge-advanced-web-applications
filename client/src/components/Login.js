@@ -22,12 +22,12 @@ export default function Login(props) {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		axiosWithAuth()
-			.post('/login', login)
+			.post('/api/login', login)
 			.then((res) => {
 				console.log(res);
 				window.localStorage.setItem('token', res.data.payload);
 
-				props.history.push('/bubblepage');
+				props.history.push('/api/bubblepage');
 			})
 			.catch((err) => console.log(err));
 	};

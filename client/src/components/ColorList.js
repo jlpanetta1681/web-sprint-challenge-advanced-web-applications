@@ -22,15 +22,14 @@ export default function Login(props) {
 			.then((res) => {
 				console.log(res);
 				localStorage.setItem('token', res.data.payload);
-				props.history.push('/bubblepage');
+				props.history.push('/api/colors');
 			})
 			.catch((err) =>
-				console.log(`Login.js axiosWithAuth error:`, err.response)
+				console.log('Login.js axiosWithAuth error:', err.response)
 			);
 	};
 	return (
 		<div>
-			
 			<form className="forms-style" onSubmit={handleSubmit}>
 				<input
 					type="text"
@@ -50,7 +49,7 @@ export default function Login(props) {
 					onChange={handleChange}
 					className="input"
 				/>
-				<button type='submit'>submit</button>
+				<button type="submit">submit</button>
 			</form>
 		</div>
 	);
